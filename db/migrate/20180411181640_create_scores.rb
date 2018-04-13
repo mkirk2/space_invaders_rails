@@ -1,8 +1,8 @@
 class CreateScores < ActiveRecord::Migration[5.1]
   def change
-    create_table :score_data do |t|
-      t.string :username
-      t.integer :final_score
+    create_table :high_scores do |t|
+      t.string :user
+      t.integer :score
     end
   end
 end
