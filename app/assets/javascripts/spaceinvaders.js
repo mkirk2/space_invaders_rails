@@ -1,3 +1,4 @@
+
 //code.iamkate.com
 function Queue(){var a=[],b=0;this.getLength=function(){return a.length-b};this.isEmpty=function(){return 0==a.length};this.enqueue=function(b){a.push(b)};this.dequeue=function(){if(0!=a.length){var c=a[b];2*++b>=a.length&&(a=a.slice(b),b=0);return c}};this.peek=function(){return 0<a.length?a[b]:void 0}};
 var alienSprites=["assets/sprites/blue_alien.png","assets/sprites/green_alien.png","assets/sprites/blue_alien2.png","assets/sprites/red_alien.png"];
@@ -80,6 +81,28 @@ function randomShoot(){
       enemyShips[randomEnemy].shoot(); 
   }else{
     randomShoot();
+  }
+}
+
+function checkIncreaseDifficulty(){
+  if(destroyedShips.length==24){
+    stopEnemies();
+    console.log("level 1 increase")
+    moveTime-=100;
+    shootTime-=500;
+    startEnemies();
+  }else if(destroyedShips.length==34){
+    console.log("level 2 increase")
+    stopEnemies();
+    moveTime-=25;
+    shootTime-=250;
+    startEnemies();
+  }else if(destroyedShips.length==43){
+    console.log("level 3 increase")
+    stopEnemies();
+    moveTime-=25;
+    shootTime-=250;
+    startEnemies();
   }
 }
 
@@ -224,6 +247,9 @@ class Enemy {
     this.enemyShip.style.visibility="hidden";
     gameController.addScore(this.enemyShip.className);
     if (soundOn) alienHitAudio.play();
+    checkIncreaseDifficulty();   
+  }
+
     console.log(destroyedShips.length)
     if(destroyedShips.length==24){
       stopEnemies();
@@ -406,7 +432,7 @@ class Projectile {
           cannotShoot=false;
         }
       }
-      })
+      });
       if(parseFloat(projectile.top)<1){
         cannotShoot=false;
         projectile.recycleProjectile(projectile)
@@ -434,7 +460,6 @@ function isColliding(a, b) {
 
 class GameController {  
   constructor(startingLives){
-    this.startingLives=startingLives;
     this.updateUI();
   }
 
@@ -457,6 +482,7 @@ class GameController {
   }
     
   updateUI() {
+
   document.getElementById("live_score").innerHTML=("Your score: " + userScore); 
   document.getElementById("high_score").innerHTML=("Highest score: " + highScore + " By " + userName);
   document.getElementById("show_lives").innerHTML=("Lives remaining: " + livesRemaining);
@@ -496,7 +522,7 @@ class GameController {
 }
 
 class Level{
-  construct(){
+  constructor();
 
   }
 }
@@ -532,6 +558,7 @@ function initiateGame() {
   var hide4 = document.getElementById("show_top_ten_list");
   hide4.style.display = "none";
 }
+
 function reload() {
   document.getElementById("restart_button");
   document.location.reload(true);
