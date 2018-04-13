@@ -6,7 +6,7 @@ class MainController < ApplicationController
   def high_score
     hs = HighScore.all.sort_by(&:score).last
     hs = hs || HighScore.new
-    render json: {user: hs.name , :score: hs.score}.to_json    
+    render json: {user: hs.user , score: hs.score }.to_json    
   end
   
   def post_score
