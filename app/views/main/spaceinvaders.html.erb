@@ -9,9 +9,12 @@
   </div>
 
   <div id="end_game_display">
-    <form id="final_form" action="/high_score" method="post">
-      <span id="score">  </span> <br>
-      Choose a Username: <input type="text" id="user"><br>
+    <form id="final_form" action= "/high_score" method="post">
+      <%= csrf_meta_tags %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <span id="user_score">  </span> <br>
+      <input id="score" name="high_score[score]" type="hidden" value="0"></input>
+      Choose a Username: <input type="text" id="user" name="high_score[user]"><br>
       <button type="submit" class="save_button" id="save_button">Submit</button>
       <button onclick="reload()" class="restart_button" id="restart_button">Restart</button>
       <br>
@@ -31,16 +34,13 @@
   </div>
 
   <div id="show_top_ten_list">
-    <span id="top_score1"> 1. </span> <br>
-    <span id="top_score2"> 2. </span> <br>
-    <span id="top_score3"> 3. </span> <br>
-    <span id="top_score4"> 4. </span> <br>
-    <span id="top_score5"> 5. </span> <br>
-    <span id="top_score6"> 6. </span> <br>
-    <span id="top_score7"> 7. </span> <br>
-    <span id="top_score8"> 8. </span> <br>
-    <span id="top_score9"> 9. </span> <br>
-    <span id="top_score10"> 10. </span> <br>
+    <ol>
+    <%@top_10.each do |record|%>
+      <li><%= record.user + "-" + (record.score).to_s %></li>
+      <br>
+    <% end %>
+
+    <ol>
   </div>
 
 </body>

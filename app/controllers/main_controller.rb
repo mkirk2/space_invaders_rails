@@ -1,6 +1,6 @@
 class MainController < ApplicationController
   def spaceinvaders
-    
+    @top_10=HighScore.limit(10).order(score: :desc).all
   end
     
   def high_score
@@ -11,7 +11,8 @@ class MainController < ApplicationController
   
   def post_score
     HighScore.create!(high_score_params)
-    render status: 200, json: {}.to_json
+    redirect_to "/"
+    #render status: 200, json: {}.to_json
   end
   
   private

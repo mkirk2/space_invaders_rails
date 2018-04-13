@@ -47,7 +47,7 @@ var destroyedShips=[];
 //game controller vars
 var userScore=0;
 var highScore=0;
-var livesRemaining=1;
+var livesRemaining=3;
 var userName='';
 var topScore="top_score";
 var gameController;
@@ -466,7 +466,7 @@ class GameController {
   document.getElementById("show_lives").innerHTML=("Lives remaining: " + livesRemaining);
 
   //end game form
-    if (livesRemaining === 0) {
+    if (livesRemaining === 0 || destroyedShips.length === 44) {
       stopEnemies();
       var show = document.getElementById("top_10_button");
       show.style.visibility = "visible";
@@ -474,27 +474,7 @@ class GameController {
       var displayForm = document.getElementById("end_game_display");
       displayForm.style.visibility = "visible";
       document.getElementById("user_score").innerHTML=("Game over! Your score was " + finalScore);
-      //var userName = document.getElementById("final_form").submit();
-      //need to access top 10 scores
-      // var times = 11;
-      // for(var i=1; i < times; i++){
-      // var topScores = document.getElementById("top_score" + i);
-      // }
-    }
-    if (destroyedShips.length === 44) {
-      stopEnemies();
-      var show = document.getElementById("top_10_button");
-      show.style.visibility = "visible";
-      var finalScore = userScore;
-      var displayForm = document.getElementById("end_game_display");
-      displayForm.style.visibility = "visible";
-      document.getElementById("user_score").innerHTML=("Game over! Your score was " + finalScore);
-      //var userName = document.getElementById("final_form").submit();
-      //need to access top 10 scores
-      // var times = 11;
-      // for(var i=1; i < times; i++){
-      // var topScores = document.getElementById("top_score" + i);
-      // }
+      document.getElementById("score").value=finalScore + "";
     }
   }
 }
@@ -503,7 +483,6 @@ class Level{
   constructor(){
     }
   }
-
 
   function toggleTopTen() {
     var toggle = document.getElementById("show_top_ten_list");
