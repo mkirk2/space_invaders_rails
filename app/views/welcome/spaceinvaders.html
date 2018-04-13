@@ -1,0 +1,52 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="spaceinvaders.js"></script>
+  <link rel="stylesheet" href="spaceinvaders.css">
+  <link ref="stylesheet" href="assets/fonts/ARCADECLASSIC.TTF" type="text/css" charset="utf-8" />
+</head>
+  
+
+<body background="https://www.jpl.nasa.gov/assets/images/content/tmp/home/missions_bg_image.jpg" id="board">
+
+  <div id="scoreboard">
+      <span id="live_score">  </span> 
+      <span id="show_lives">  </span>
+      <span id="high_score">  </span>
+  </div>
+
+  <div id="end_game_display">
+    <form id="final_form" method="get">
+      <span id="user_score">  </span> <br>
+      Choose a Username: <input type="text" id="user_name"><br>
+      <button type="submit" class="save_button" id="save_button">Submit</button>
+      <button onclick="reload()" class="restart_button" id="restart_button">Restart</button>
+      <br>
+    </form>
+  </div>
+
+  <div id="initiate_button">
+    <button onclick="initiateGame()" class="start_button"> Start Game </button>
+    <br>
+  </div>
+  <button onclick="toggleSound()" class="toggle_sound_class" id="toggle_sound_button"> Turn Sound Off </button>
+  <br>
+  <br>
+  <br>
+  <div id="top_10_button">
+    <button onclick="toggleTopTen()" class="toggle_top_scores_button"> Top 10 scores </button>
+  </div>
+
+  <div id="show_top_ten_list">
+    <span id="top_score1"> 1. </span> <br>
+    <span id="top_score2"> 2. </span> <br>
+    <span id="top_score3"> 3. </span> <br>
+    <span id="top_score4"> 4. </span> <br>
+    <span id="top_score5"> 5. </span> <br>
+    <span id="top_score6"> 6. </span> <br>
+    <span id="top_score7"> 7. </span> <br>
+    <span id="top_score8"> 8. </span> <br>
+    <span id="top_score9"> 9. </span> <br>
+    <span id="top_score10"> 10. </span> <br>
+  </div>
+
+</body>
