@@ -85,7 +85,7 @@ function randomShoot(){
 }
 
 function checkIncreaseDifficulty(){
-  if(destroyedShips.length==24){
+  if(destroyedShips.length===24){
     stopEnemies();
     console.log("level 1 increase")
     moveTime-=100;
@@ -176,7 +176,7 @@ function moveEnemies(){
     movesRemaining=moveTurns;
     reverse=!reverse;
     downCount--;
-    if(downCount==0){
+    if(downCount===0){
       livesRemaining=0;
       gameController.updateUI();
       stopEnemies();
