@@ -5,9 +5,9 @@ var alienSprites=["assets/sprites/blue_alien.png","assets/sprites/green_alien.pn
 var playerSprite="assets/sprites/player.png";
 var projectileSprite="assets/sprites/projectile.png"
 var explosionSprite="assets/sprites/explosion.png"
-var playerShootAudio = new Audio('shoot.wav');
-var playerHitAudio = new Audio("/audio/explosion.wav");
-var alienHitAudio = new Audio("/audio/invaderkilled.wav");
+var playerShootAudio = new Audio('assets/sprites/shoot.wav');
+var playerHitAudio = new Audio("assets/sprites/explosion.wav");
+var alienHitAudio = new Audio("assets/sprites/invaderkilled.wav");
 var soundOn = true;
 var board; 
 var leftBoundary=10;
