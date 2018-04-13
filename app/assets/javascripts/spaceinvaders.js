@@ -5,9 +5,9 @@ var alienSprites=["assets/sprites/blue_alien.png","assets/sprites/green_alien.pn
 var playerSprite="assets/sprites/player.png";
 var projectileSprite="assets/sprites/projectile.png"
 var explosionSprite="assets/sprites/explosion.png"
-var playerShootAudio = new Audio('assets/audio/shoot.wav');
-var playerHitAudio = new Audio("assets/audio/explosion.wav");
-var alienHitAudio = new Audio("assets/audio/invaderkilled.wav");
+var playerShootAudio = new Audio('shoot.wav');
+var playerHitAudio = new Audio("/audio/explosion.wav");
+var alienHitAudio = new Audio("/audio/invaderkilled.wav");
 var soundOn = true;
 var board; 
 var leftBoundary=10;
@@ -248,28 +248,6 @@ class Enemy {
     gameController.addScore(this.enemyShip.className);
     if (soundOn) alienHitAudio.play();
     checkIncreaseDifficulty();   
-  }
-
-    console.log(destroyedShips.length)
-    if(destroyedShips.length==24){
-      stopEnemies();
-      console.log("level 1 increase")
-      moveTime-=100;
-      shootTime-=500;
-      startEnemies();
-    }else if(destroyedShips.length==34){
-      console.log("level 2 increase")
-      stopEnemies();
-      moveTime-=25;
-      shootTime-=250;
-      startEnemies();
-    }else if(destroyedShips.length==43){
-      console.log("level 3 increase")
-      stopEnemies();
-      moveTime-=25;
-      shootTime-=250;
-      startEnemies();
-    }
   }
 }
 
@@ -522,10 +500,10 @@ class GameController {
 }
 
 class Level{
-  constructor();
-
+  constructor(){
+    }
   }
-}
+
 
   function toggleTopTen() {
     var toggle = document.getElementById("show_top_ten_list");
