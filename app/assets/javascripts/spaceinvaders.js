@@ -22,11 +22,6 @@ var playerProjectileSpeed=1.5;
 var enemyProjectileSpeed=1;
 var cannotShoot=true;
 var respawnTime=3000;
-
-var leftMostRow=0;
-var rightMostRow=10;
-//governs when the ships should move down
-var moveDown=false;
 //each time the aliens move down this is decreased, when it reaches 0 the game is lost
 var downCount=16;
 //time in ms that takes for the projectile to update position (less is faster)
@@ -36,8 +31,12 @@ var moveDistanceX=1;
 var moveDistanceY=3;
 //Time in ms that it takes for the enemy to move to the right/left
 var moveTime=250;
+//Number of times that it will move to the left/right before moving down and reversing direction
+var moveTurns=25;
 // Time in ms that it takes for the enemy to shoot
 var shootTime=1800;
+//Keeps current move turn
+var movesRemaining=moveTurns;
 //Number of projectiles instantiated when the game starts
 var projectileNumber=15;
 var projectiles = new Queue();
@@ -74,17 +73,6 @@ function startEnemies(){
 function stopEnemies(){
   clearInterval(enemyMoveInterval);
   clearInterval(enemyShootInterval);
-}
-
-function reverseMovement(){
-  reverse=!reverse;
-  downCount--;
-    if(downCount==0){
-      livesRemaining=0;
-      gameController.updateUI();
-      stopEnemies();
-    }
-    moveDown=true;
 }
 
 function randomShoot(){
@@ -171,21 +159,29 @@ function createGameObject(sprite=""){
 
 function moveEnemies(){
   enemyShips.forEach(function(enemy){
-    enemy.checkEdges();
-   if(!moveDown){
+   if(movesRemaining>0){
     currentPosX=parseFloat(enemy.left);
     if(!reverse){        
         enemy.left=toPercentage(currentPosX+moveDistanceX);
       } else {
         enemy.left=toPercentage(currentPosX-moveDistanceX);
       }
-      
     }else{
       currentPosY=parseFloat(enemy.top);
       enemy.top=toPercentage(currentPosY+moveDistanceY);
     }
   });
-  if (moveDown) moveDown = false;
+  movesRemaining--;
+  if(movesRemaining<0){
+    movesRemaining=moveTurns;
+    reverse=!reverse;
+    downCount--;
+    if(downCount==0){
+      livesRemaining=0;
+      gameController.updateUI();
+      stopEnemies();
+    }
+  }
 }
 
 class Enemy {
@@ -254,10 +250,25 @@ class Enemy {
     checkIncreaseDifficulty();   
   }
 
-  //checks when an alien ship has reached the edge and should reverse the whole group's movement.
-  checkEdges(){
-    if(parseFloat(this.left)==10 || parseFloat(this.left)==90){
-      reverseMovement();
+    console.log(destroyedShips.length)
+    if(destroyedShips.length==24){
+      stopEnemies();
+      console.log("level 1 increase")
+      moveTime-=100;
+      shootTime-=500;
+      startEnemies();
+    }else if(destroyedShips.length==34){
+      console.log("level 2 increase")
+      stopEnemies();
+      moveTime-=25;
+      shootTime-=250;
+      startEnemies();
+    }else if(destroyedShips.length==43){
+      console.log("level 3 increase")
+      stopEnemies();
+      moveTime-=25;
+      shootTime-=250;
+      startEnemies();
     }
   }
 }
@@ -471,11 +482,12 @@ class GameController {
   }
     
   updateUI() {
-    document.getElementById("live_score").innerHTML=("Your score: " + userScore); 
-    document.getElementById("high_score").innerHTML=("Highest score: " + highScore + " By " + userName);
-    document.getElementById("show_lives").innerHTML=("Lives remaining: " + livesRemaining);
 
-    //end game form
+  document.getElementById("live_score").innerHTML=("Your score: " + userScore); 
+  document.getElementById("high_score").innerHTML=("Highest score: " + highScore + " By " + userName);
+  document.getElementById("show_lives").innerHTML=("Lives remaining: " + livesRemaining);
+
+  //end game form
     if (livesRemaining === 0) {
       stopEnemies();
       var show = document.getElementById("top_10_button");
@@ -510,7 +522,7 @@ class GameController {
 }
 
 class Level{
-  constructor(){
+  constructor();
 
   }
 }
