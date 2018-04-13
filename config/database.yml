@@ -22,6 +22,6 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
+  adapter: postgresqls
   username: spaceinvaders_production
   database: db/spaceinvaders_production
