@@ -1,6 +1,6 @@
 
 //code.iamkate.com
-function Queue(){var a=[],b=0;this.getLength=function(){return a.length-b};this.isEmpty=function(){return 0==a.length};this.enqueue=function(b){a.push(b)};this.dequeue=function(){if(0!=a.length){var c=a[b];2*++b>=a.length&&(a=a.slice(b),b=0);return c}};this.peek=function(){return 0<a.length?a[b]:void 0}};
+function Queue(){var a=[],b=0;this.getLength=function(){return a.length-b};this.isEmpty=function(){return 0===a.length};this.enqueue=function(b){a.push(b)};this.dequeue=function(){if(0!==a.length){var c=a[b];2*++b>=a.length&&(a=a.slice(b),b=0);return c}};this.peek=function(){return 0<a.length?a[b]:void 0}};
 var alienSprites=["assets/sprites/blue_alien.png","assets/sprites/green_alien.png","assets/sprites/blue_alien2.png","assets/sprites/red_alien.png"];
 var playerSprite="assets/sprites/player.png";
 var projectileSprite="assets/sprites/projectile.png"
@@ -91,7 +91,7 @@ function checkIncreaseDifficulty(){
     moveTime-=100;
     shootTime-=500;
     startEnemies();
-  }else if(destroyedShips.length==34){
+  }else if(destroyedShips.length===34){
     console.log("level 2 increase")
     stopEnemies();
     moveTime-=25;
@@ -113,7 +113,7 @@ document.addEventListener('keydown',function (evt){
   } else if (evt.which === 39){
     if(playerShip.left>rightBoundary) return;
     playerShip.moveRight();
-  } else if(evt.which== 32){ 
+  } else if(evt.which=== 32){ 
       if (!cannotShoot) {
         playerShip.shoot(); 
         if (soundOn) playerShootAudio.play(); 
@@ -132,7 +132,7 @@ function instantiateEnemies() {
   for(var j=0;j<4;j++){
     for (var i=0;i<11;i++){
       var offset=0;
-      if(j % 2 != 0) offset=horizontalOffset;
+      if(j % 2 !== 0) offset=horizontalOffset;
       var enemy=new Enemy(alienSprites[j],toPercentage(startingPosX + horizontalSpacing * i + offset),toPercentage(startingPosY + verticalSpacing * j),i,j);
       enemyShips[count] = enemy; 
       count++;    
@@ -148,7 +148,7 @@ function createGameObject(sprite=""){
   var gameObject = document.createElement("div");
   document.body.appendChild(gameObject);
   var objectSprite = document.createElement("img");
-  if(sprite!=""){
+  if(sprite!==""){
     objectSprite.src=sprite;
   }
   gameObject.appendChild(objectSprite);
