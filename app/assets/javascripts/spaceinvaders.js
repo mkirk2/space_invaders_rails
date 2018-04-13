@@ -47,7 +47,7 @@ var destroyedShips=[];
 //game controller vars
 var userScore=0;
 var highScore=0;
-var livesRemaining=3;
+var livesRemaining=1;
 var userName='';
 var topScore="top_score";
 var gameController;

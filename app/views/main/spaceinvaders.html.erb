@@ -9,9 +9,9 @@
   </div>
 
   <div id="end_game_display">
-    <form id="final_form" method="get">
-      <span id="user_score">  </span> <br>
-      Choose a Username: <input type="text" id="user_name"><br>
+    <form id="final_form" action="/high_score" method="post">
+      <span id="score">  </span> <br>
+      Choose a Username: <input type="text" id="user"><br>
       <button type="submit" class="save_button" id="save_button">Submit</button>
       <button onclick="reload()" class="restart_button" id="restart_button">Restart</button>
       <br>
